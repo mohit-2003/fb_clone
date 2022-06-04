@@ -1,4 +1,5 @@
 import 'package:fb_clone/screens/home_screen.dart';
+import 'package:fb_clone/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,10 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Facebook Clone',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          // visualDensity: VisualDensity.adaptivePlatformDensity,
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: scaffoldBackgroundColor),
       home: const HomeScreen(),
     );
   }
