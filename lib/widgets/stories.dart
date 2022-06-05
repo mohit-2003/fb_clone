@@ -3,6 +3,7 @@ import 'package:fb_clone/models/story.dart';
 import 'package:fb_clone/models/user.dart';
 import 'package:fb_clone/utils/colors.dart';
 import 'package:fb_clone/widgets/profile_avatar.dart';
+import 'package:fb_clone/widgets/responsive_lyt.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,9 @@ class Stories extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       height: 200,
-      color: Colors.white,
+      color: ResponsiveLayout.isDesktop(context)
+          ? Colors.transparent
+          : Colors.white,
       child: new ListView.builder(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
         scrollDirection: Axis.horizontal,
@@ -58,11 +61,19 @@ class _StoryCard extends StatelessWidget {
               fit: BoxFit.fill),
         ),
         new Container(
-          height: double.infinity,
-          width: 110,
-          decoration: new BoxDecoration(
-              gradient: storyGradient, borderRadius: BorderRadius.circular(12)),
-        ),
+            height: double.infinity,
+            width: 110,
+            decoration: new BoxDecoration(
+                gradient: storyGradient,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: ResponsiveLayout.isDesktop(context)
+                    ? [
+                        new BoxShadow(
+                            color: Colors.black26,
+                            offset: new Offset(0, 2),
+                            blurRadius: 4)
+                      ]
+                    : null)),
         new Positioned(
             left: 8,
             top: 8,

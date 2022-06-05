@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fb_clone/models/post.dart';
 import 'package:fb_clone/utils/colors.dart';
 import 'package:fb_clone/widgets/profile_avatar.dart';
+import 'package:fb_clone/widgets/responsive_lyt.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -11,40 +12,48 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
-      padding: EdgeInsets.symmetric(vertical: 8),
-      color: Colors.white,
-      child: Column(
-        children: [
-          new Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                new _PostHeader(post: post),
-                new SizedBox(
-                  height: 4,
-                ),
-                new Text(post.caption),
-                post.imageUrl != null
-                    ? new SizedBox(
-                        height: 8,
-                      )
-                    : new SizedBox(
-                        height: 6,
-                      )
-              ],
+    final bool isDesktop = ResponsiveLayout.isDesktop(context);
+    return new Card(
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: isDesktop ? 5 : 0),
+      elevation: isDesktop ? 1 : 0,
+      shape: isDesktop
+          ? new RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0))
+          : null,
+      child: new Container(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        color: Colors.white,
+        child: Column(
+          children: [
+            new Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  new _PostHeader(post: post),
+                  new SizedBox(
+                    height: 4,
+                  ),
+                  new Text(post.caption),
+                  post.imageUrl != null
+                      ? new SizedBox(
+                          height: 8,
+                        )
+                      : new SizedBox(
+                          height: 6,
+                        )
+                ],
+              ),
             ),
-          ),
-          post.imageUrl != null
-              ? new CachedNetworkImage(imageUrl: post.imageUrl!)
-              : new SizedBox.shrink(),
-          new Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: new _PostStat(post: post),
-          )
-        ],
+            post.imageUrl != null
+                ? new CachedNetworkImage(imageUrl: post.imageUrl!)
+                : new SizedBox.shrink(),
+            new Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: new _PostStat(post: post),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -100,39 +109,42 @@ class _PostStat extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Column(
       children: [
-        new Row(
-          children: [
-            new Container(
-              padding: EdgeInsets.all(4),
-              decoration:
-                  new BoxDecoration(color: fbBlue, shape: BoxShape.circle),
-              child: new Icon(
-                Icons.thumb_up,
-                size: 10,
-                color: Colors.white,
+        new Container(
+          margin: EdgeInsets.only(top: 5),
+          child: new Row(
+            children: [
+              new Container(
+                padding: EdgeInsets.all(4),
+                decoration:
+                    new BoxDecoration(color: fbBlue, shape: BoxShape.circle),
+                child: new Icon(
+                  Icons.thumb_up,
+                  size: 10,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            new SizedBox(
-              width: 4,
-            ),
-            new Expanded(
-              child: new Text(
-                "${post.likes}",
+              new SizedBox(
+                width: 4,
+              ),
+              new Expanded(
+                child: new Text(
+                  "${post.likes}",
+                  style: new TextStyle(color: Colors.grey[600]),
+                ),
+              ),
+              new Text(
+                "${post.comments} Comments",
                 style: new TextStyle(color: Colors.grey[600]),
               ),
-            ),
-            new Text(
-              "${post.comments} Comments",
-              style: new TextStyle(color: Colors.grey[600]),
-            ),
-            new SizedBox(
-              width: 8,
-            ),
-            new Text(
-              "${post.shares} Shares",
-              style: new TextStyle(color: Colors.grey[600]),
-            )
-          ],
+              new SizedBox(
+                width: 8,
+              ),
+              new Text(
+                "${post.shares} Shares",
+                style: new TextStyle(color: Colors.grey[600]),
+              )
+            ],
+          ),
         ),
         new Divider(),
         new Row(

@@ -5,11 +5,13 @@ class CustomBottomNavBar extends StatelessWidget {
   final List<IconData> icons;
   final int selectedScreen;
   final Function(int) onTap;
+  final bool isBottomIndicator;
   const CustomBottomNavBar(
       {Key? key,
       required this.icons,
       required this.selectedScreen,
-      required this.onTap})
+      required this.onTap,
+      this.isBottomIndicator = false})
       : super(key: key);
 
   @override
@@ -30,7 +32,9 @@ class CustomBottomNavBar extends StatelessWidget {
           .values
           .toList(),
       indicator: new BoxDecoration(
-          border: new Border(top: new BorderSide(color: fbBlue, width: 3))),
+          border: isBottomIndicator
+              ? new Border(bottom: new BorderSide(color: fbBlue, width: 3))
+              : new Border(top: new BorderSide(color: fbBlue, width: 3))),
       indicatorPadding: EdgeInsets.zero,
       onTap: onTap,
     );
