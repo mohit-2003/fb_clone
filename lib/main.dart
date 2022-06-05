@@ -1,5 +1,6 @@
 import 'package:fb_clone/screens/navigation_screen.dart';
 import 'package:fb_clone/utils/colors.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: new MaterialScrollBehavior().copyWith(
+          dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
       debugShowCheckedModeBanner: false,
       title: 'Facebook Clone',
       theme: ThemeData(
