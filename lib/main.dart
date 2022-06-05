@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       scrollBehavior: new MaterialScrollBehavior().copyWith(
-          dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
+          dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch}),
       debugShowCheckedModeBanner: false,
       title: 'Facebook Clone',
       theme: ThemeData(

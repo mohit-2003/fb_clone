@@ -1,4 +1,4 @@
-package com.example.fb_clone
+package com.fb.clone
 
 import io.flutter.embedding.android.FlutterActivity
 
