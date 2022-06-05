@@ -1,4 +1,4 @@
-import 'package:fb_clone/screens/home_screen.dart';
+import 'package:fb_clone/screens/navigation_screen.dart';
 import 'package:fb_clone/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           // visualDensity: VisualDensity.adaptivePlatformDensity,
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: scaffoldBackgroundColor),
-      home: const HomeScreen(),
+      home: const NavScreen(),
     );
   }
 }
